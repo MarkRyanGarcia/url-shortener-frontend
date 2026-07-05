@@ -18,7 +18,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     try {
-        const upstream = await fetch('https://url.markg.dev/api/v1/shorten', {
+        const backendUrl = process.env.BACKEND_URL
+        const upstream = await fetch(`${backendUrl}/api/v1/shorten`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

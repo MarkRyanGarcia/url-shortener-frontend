@@ -175,7 +175,7 @@ export default function App() {
             <p className="mt-6 text-xs" style={{ color: 'var(--color-secondary)' }}>
                 Built by{' '}
                 <a
-                    href="https://markg.dev"
+                    href="https://markgarcia.dev"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hover:underline"

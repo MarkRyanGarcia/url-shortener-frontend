@@ -12,13 +12,17 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     const apiKey = process.env.API_KEY
+    const backendUrl = process.env.BACKEND_URL
 
     if (!apiKey) {
-        return res.status(500).json({ error: 'API key not configured' })
+        return res.status(500).json({ error: 'API_KEY not configured' })
+    }
+
+    if (!backendUrl) {
+        return res.status(500).json({ error: 'BACKEND_URL not configured' })
     }
 
     try {
-        const backendUrl = process.env.BACKEND_URL
         const upstream = await fetch(`${backendUrl}/api/v1/shorten`, {
             method: 'POST',
             headers: {
@@ -30,7 +34,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
         const data = await upstream.json()
         return res.status(upstream.status).json(data)
-    } catch {
-        return res.status(502).json({ error: 'Failed to reach upstream service' })
+    } catch (err) {
+        return res.status(502).json({ error: 'Failed to reach upstream service', detail: String(err) })
     }
 }

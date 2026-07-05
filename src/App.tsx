@@ -31,7 +31,7 @@ export default function App() {
             const data = await res.json()
 
             if (!res.ok) {
-                setError(data?.detail || data?.message || `Error ${res.status}: Failed to shorten URL.`)
+                setError(data?.detail || data?.error || data?.message || `Error ${res.status}: Failed to shorten URL.`)
                 return
             }
 

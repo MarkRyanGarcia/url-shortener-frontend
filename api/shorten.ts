@@ -32,7 +32,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             body: JSON.stringify({ long_url }),
         })
 
-        const data = await upstream.json()
+        const text = await upstream.text()
+        let data: unknown
+        try {
+            data = JSON.parse(text)
+        } catch {
+            data = { error: text }
+        }
         return res.status(upstream.status).json(data)
     } catch (err) {
         return res.status(502).json({ error: 'Failed to reach upstream service', detail: String(err) })

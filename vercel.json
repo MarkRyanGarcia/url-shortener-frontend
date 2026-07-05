@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://url-shortener-k97p.onrender.com/api/:path*"
+    },
+    {
+      "source": "/:shortCode([a-zA-Z0-9]{6})",
+      "destination": "https://url-shortener-k97p.onrender.com/:shortCode"
+    }
+  ]
+}
